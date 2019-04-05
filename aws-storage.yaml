@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+spec:
+  # storageClassName: local-storage-on-host-machine
+  storageClassName: cloud-ssd
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 7Gi
+
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: cloud-ssd
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+
+
+
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: local-storage
+# spec:
+#   storageClassName: local-storage-on-host-machine
+#   capacity:
+#     storage: 20Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: "/mnt/some new/directory/structure/"
+#     type: DirectoryOrCreate
