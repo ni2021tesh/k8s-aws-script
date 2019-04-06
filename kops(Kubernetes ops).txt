@@ -23,3 +23,6 @@ kops update cluster ${NAME} --yes
 
 ************* Execute this line to delete the cluster *******************
 kops delete cluster --name ${NAME} --yes
+
+
+helm install --name minitoring --namespace monitoring stable/prometheus-operator
